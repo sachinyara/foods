@@ -1,11 +1,8 @@
 package com.foodservice.foods;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.foodservice.foods.repository.ItemsRepository;
 
 /**
  * The bean configuration file.
@@ -15,15 +12,10 @@ import com.foodservice.foods.repository.ItemsRepository;
  */
 @Configuration
 public class FoodsApplicationConfig {
-	
-	@Autowired
-	ItemsRepository itemsRepository;
-	
 	@Bean
 	public CommandLineRunner runner() {
 		return args ->  {
-			System.out.println(itemsRepository.findById(1L));
-			System.out.println("Hello!!");
+			System.out.println("Hello!! sWelcome to Food Service.");
 		};
 	}
 }

@@ -22,7 +22,7 @@ public class ItemsServiceImpl implements ItemsService {
 
 	@Override
 	public List<Items> getAll() {
-		return itemsRepository.findAll();
+		return itemsRepository.getAll();
 	}
 
 }

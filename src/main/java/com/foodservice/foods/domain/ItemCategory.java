@@ -3,7 +3,7 @@ package com.foodservice.foods.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name = "ITEM_CATEGORY")
+@Entity
 public class ItemCategory {
 	
 	@Id

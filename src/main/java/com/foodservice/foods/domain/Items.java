@@ -16,7 +16,7 @@ import javax.persistence.SequenceGenerator;
  * 
  * @author SKumar6
  */
-@Entity(name="ITEMS")
+@Entity
 public class Items {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ITEMS_SEQUENCE")
