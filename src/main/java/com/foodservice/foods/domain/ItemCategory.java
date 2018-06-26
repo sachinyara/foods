@@ -1,5 +1,6 @@
 package com.foodservice.foods.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -7,8 +8,10 @@ import javax.persistence.Id;
 public class ItemCategory {
 	
 	@Id
+	@Column(name = "ID")
 	private Long id;
 	
+	@Column(name = "NAME")
 	private String name;
 	
 	public Long getId() {

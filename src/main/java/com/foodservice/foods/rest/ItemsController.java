@@ -2,6 +2,8 @@ package com.foodservice.foods.rest;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +26,7 @@ public class ItemsController {
 	private ItemsService itemsService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Items> getAll() {
+	public List<Items> getAll(HttpServletResponse response) {
 		return itemsService.getAll();
 	}
 	
