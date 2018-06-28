@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.foodservice.foods.domain.Items;
+import com.foodservice.foods.dto.ItemsWithCategory;
 import com.foodservice.foods.service.ItemsService;
 
 /**
@@ -26,7 +26,7 @@ public class ItemsController {
 	private ItemsService itemsService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Items> getAll(HttpServletResponse response) {
+	public List<ItemsWithCategory> getAll(HttpServletResponse response) {
 		return itemsService.getAll();
 	}
 	

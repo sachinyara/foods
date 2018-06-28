@@ -2,7 +2,7 @@ package com.foodservice.foods.service;
 
 import java.util.List;
 
-import com.foodservice.foods.domain.Items;
+import com.foodservice.foods.dto.ItemsWithCategory;
 
 /**
  * The service interface to perform CRUD on food items.
@@ -11,5 +11,5 @@ import com.foodservice.foods.domain.Items;
  *
  */
 public interface ItemsService {
-	List<Items> getAll();
+	List<ItemsWithCategory> getAll();
 }

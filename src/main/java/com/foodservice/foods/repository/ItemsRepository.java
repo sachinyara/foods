@@ -13,7 +13,7 @@ import com.foodservice.foods.domain.Items;
  */
 public interface ItemsRepository  extends JpaRepository<Items, Long>{
 	
-	@Query("select i from Items i join fetch i.itemCategory")
+	@Query("select i from Items i join fetch i.itemCategory where i.available = true")
 	List<Items> getAll();
 
 }
