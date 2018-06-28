@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.foodservice.foods.domain.Items;
 
-public class ItemsWithCategory {
+public class ItemsWithCategory implements Comparable<ItemsWithCategory>{
 	private Long categoryId;
 	private String category;
 	private List<Items> items = new ArrayList<>();
@@ -27,5 +27,9 @@ public class ItemsWithCategory {
 	}
 	public void setItems(List<Items> items) {
 		this.items = items;
+	}
+	@Override
+	public int compareTo(ItemsWithCategory o) {
+		return o.category.compareTo(this.category);
 	}
 }
