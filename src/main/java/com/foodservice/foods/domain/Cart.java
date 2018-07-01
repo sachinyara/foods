@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -24,9 +23,8 @@ public class Cart {
 	@Column(name = "ID")
 	private Long id;
 	
-	@OneToOne
-	@JoinColumn(name = "USER_ID")
-	private User user;
+	@Column(name = "USER_ID")
+	private Long userId;
 	
 	@ManyToOne
 	@JoinColumn(name = "ITEM_ID")
@@ -43,12 +41,12 @@ public class Cart {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public Items getItem() {
@@ -69,6 +67,6 @@ public class Cart {
 
 	@Override
 	public String toString() {
-		return "Cart [user=" + user + ", item=" + item + ", quantity=" + quantity + "]";
+		return "Cart [userId=" + userId + ", item=" + item + ", quantity=" + quantity + "]";
 	}
 }

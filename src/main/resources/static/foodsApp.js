@@ -4,7 +4,7 @@
 (
 function () {
     'use strict';
-    angular.module('foodsApp', []);
+    angular.module('foodsApp', ['ngCookies']);
 
 }()
 );

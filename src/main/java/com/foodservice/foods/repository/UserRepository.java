@@ -1,6 +1,8 @@
 package com.foodservice.foods.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.foodservice.foods.domain.User;
 
@@ -10,5 +12,6 @@ import com.foodservice.foods.domain.User;
  * @author SKumar6
  */
 public interface UserRepository extends JpaRepository<User, Long>{
-	User findByDeviceId(final String deviceId);
+	@Query("select u.id from User u where u.deviceId = :deviceId")
+	Long findByDeviceId(@Param("deviceId") final String deviceId);
 }

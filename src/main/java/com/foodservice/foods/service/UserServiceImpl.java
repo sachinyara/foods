@@ -1,7 +1,5 @@
 package com.foodservice.foods.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +18,7 @@ public class UserServiceImpl implements UserService{
 	private UserRepository userRepository;
 
 	@Override
-	public List<User> getAll() {
-		return userRepository.findAll();
-	}
-
-	@Override
-	public User get(final String deviceId) {
+	public Long get(final String deviceId) {
 		return userRepository.findByDeviceId(deviceId);
 	}
 
