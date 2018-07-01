@@ -1,0 +1,48 @@
+<div class="container">
+	<div class="row" style="position:fixed; z-index:1000; width:1170px">
+		<div class="col-sm-12 alert alert-warning">
+			<span class="header">{{$ctrl.siteName}}</span>
+		</div>
+	</div>
+	<div class="row" style="padding:100px 0px 0px 0px;">
+		<div class="col-sm-2">
+			<div class="row">
+				<h4>&nbsp;</h4>
+				<div class="col-sm-12">	
+					<div ng-repeat = "itemCategory in $ctrl.items">
+						<a href="#category{{itemCategory.categoryId}}" class="btn btn-default btn-block">
+						<h4 style="color:#800000">{{itemCategory.category}}</h4></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-7">
+			<div ng-repeat = "itemCategory in $ctrl.items">
+				<div class="row">
+					<div class="col-sm-12">
+						<h4 id="category{{itemCategory.categoryId}}" style="color:#800000">{{itemCategory.category}}</h4>
+					</div>
+				</div>
+				<div class="row">
+					<div ng-repeat = "item in itemCategory.items">
+						<div class="col-sm-4">
+							<div class="thumbnail">
+								<img src="data:image/jpeg;base64,{{item.itemImage}}" alt="No Image" class="item-image">
+								<div class="caption item-details">
+									<span class="veg-image"></span>
+									<h4 class="float-left" style="display: inline;">&nbsp;{{item.name}}</h4>
+									<p class="small">{{item.description}}</p>
+									<p>
+										<span class="text-danger" >&nbsp;Rs {{item.price}}</span>
+										<button class="btn btn-xs btn-success pull-right">ADD</button>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3"></div>
+	</div>
+</div>

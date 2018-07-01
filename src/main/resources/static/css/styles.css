@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+span.veg-image {
+	background-image: url("../assets/veg-non-veg.png");
+	background-position: right center;
+	background-repeat: no-repeat;
+	background-size: 40px 20px;
+	width: 20px;
+	height: 20px;
+	display: block;
+	float: left;
+}
+span.non-veg-image {
+	background-image: url("../assets/veg-non-veg.png");
+	background-position: left center;
+	background-repeat: no-repeat;
+	background-size: 40px 20px;
+	width: 20px;
+	height: 20px;
+	display: block;
+	float: left;
+}
+p {padding: 10px 5px 0px 0px;}
+
+.header {
+	color: #800000;
+	font-weight: bolder;
+	font-size: 3vw;
+	font-style: oblique;
+}
