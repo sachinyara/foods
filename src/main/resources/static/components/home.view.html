@@ -1,66 +1,95 @@
-<div class="container">
-	<div class="row" style="position:fixed; z-index:1000; width:1170px">
-		<div class="col-sm-12 alert alert-warning">
-			<span class="header">{{$ctrl.siteName}}</span>
-		</div>
-	</div>
-	<div class="row" style="padding:100px 0px 0px 0px;">
-		<div class="col-sm-2">
-			<div class="row">
-				<h4>&nbsp;</h4>
-				<div class="col-sm-12">	
-					<div ng-repeat = "itemCategory in $ctrl.items">
-						<a href="#category{{itemCategory.categoryId}}" class="btn btn-default btn-block">
-						<h4 style="color:#800000">{{itemCategory.category}}</h4></a>
-					</div>
+<div class="row" style="padding:100px 0px 0px 0px;">
+	<div class="col-sm-2">
+		<div class="row">
+			<h4>&nbsp;</h4>
+			<div class="col-sm-12">	
+				<div ng-repeat = "itemCategory in items">
+					<a href="#category{{itemCategory.categoryId}}" class="btn btn-default btn-block red-border">
+					<h4 style="color:#800000">{{itemCategory.category}}</h4></a>
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-7">
-			<div ng-repeat = "itemCategory in $ctrl.items">
-				<div class="row">
-					<div class="col-sm-12">
-						<h4 id="category{{itemCategory.categoryId}}" style="color:#800000">{{itemCategory.category}}</h4>
-					</div>
+	</div>
+	<div class="col-sm-7">
+		<div ng-repeat = "itemCategory in items">
+			<div class="row">
+				<div class="col-sm-12">
+					<h4 id="category{{itemCategory.categoryId}}" style="color:#800000">{{itemCategory.category}}</h4>
 				</div>
-				<div class="row">
-					<div ng-repeat = "item in itemCategory.items">
-						<div class="col-sm-4">
-							<div class="thumbnail">
-								<img src="data:image/jpeg;base64,{{item.itemImage}}" alt="No Image" class="item-image">
-								<div class="caption item-details">
-									<span class="veg-image"></span>
-									<h4 class="float-left" style="display: inline;">&nbsp;{{item.name}}</h4>
-									<p class="small">{{item.description}}</p>
-									<p>
-										<span class="text-danger" >&nbsp;Rs {{item.price}}</span>
-										<button class="btn btn-xs btn-success pull-right">ADD</button>
-									</p>
-								</div>
+			</div>
+			<div class="row">
+				<div ng-repeat = "item in itemCategory.items">
+					<div class="col-sm-4">
+						<div class="thumbnail red-border">
+							<img src="data:image/jpeg;base64,{{item.itemImage}}" alt="No Image" class="item-image">
+							<div class="caption item-details">
+								<span class="veg-image"></span>
+								<h4 class="float-left" style="display: inline;">&nbsp;{{item.name}}</h4>
+								<p class="small">{{item.description}}</p>
+								<p>
+									<span class="text-danger" >&nbsp;Rs {{item.price}}</span>
+									<span ng-show="item.orderQantity > 0">
+										<span class="btn-group  pull-right">
+										  <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.removeItemToCart(item)">-</button>
+										  <button type="button" class="btn btn-success btn-xs">{{item.orderQantity}}</button>
+										  <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.addItemToCart(item)">+</button>
+										</span>
+									</span>
+									<span ng-show="item.orderQantity == 0" class="pull-right">
+										<button class="btn btn-success btn-xs" ng-click="$ctrl.addItemToCart(item)">ADD</button>
+									</span>
+								</p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-3">
-			<div class="row">
-					<div class="col-sm-12">
-						<h4 style="color:#800000">Cart</h4>
-					</div>
+	</div>
+	<div class="col-sm-3">
+		<div class="row">
+				<div class="col-sm-12">
+					<span class="cart-image"></span>
+					<h4 style="color:#800000">&nbsp;&nbsp;Cart</h4>
+				</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<hr>
+				<span class="empty-cart" ng-if = "$ctrl.cart.length == 0"></span>
 			</div>
-			<div class="row" ng-repeat = "cartItem in $ctrl.cart">
-				<div class="col-sm-7">
-					<span class="veg-image"></span>
-					<h5 class="float-left" style="display: inline;">&nbsp;{{cartItem.item.name}}</h5>
-				</div>
-				<div class="col-sm-2">
-					{{cartItem.quantity}}
-				</div>
-				<div class="col-sm-3">
-					Rs {{cartItem.item.price}}
-				</div>
+		</div>
+		<div class="row" style="padding: 3px" ng-repeat = "cartItem in $ctrl.cart">
+			<div class="col-sm-6">
+				<span class="veg-image"></span>
+				<h6 class="float-left" style="display: inline;">&nbsp;{{cartItem.item.name}}</h6>
 			</div>
+			<div class="col-sm-2 small">
+				{{cartItem.quantity}}
+			</div>
+			<div class="col-sm-4 small">
+				Rs {{cartItem.item.price * cartItem.quantity}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<hr>
+			</div>
+		</div>
+		<div ng-if = "$ctrl.cart.length > 0">
+		<div class="row">
+			<div class="col-sm-8">
+				<h4 style="color:#800000">Sub Total</h4>
+			</div>
+			<div class="col-sm-4">
+				<h5 style="color:#800000">Rs {{$ctrl.totalBill}}</h5>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<button class="btn btn-success btn-block">Checkout</button>
+			</div>
+		</div>
 		</div>
 	</div>
 </div>

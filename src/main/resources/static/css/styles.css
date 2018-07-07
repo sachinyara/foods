@@ -3,9 +3,9 @@ span.veg-image {
 	background-image: url("../assets/veg-non-veg.png");
 	background-position: right center;
 	background-repeat: no-repeat;
-	background-size: 40px 20px;
-	width: 20px;
-	height: 20px;
+	background-size: 30px 15px;
+	width: 15px;
+	height: 15px;
 	display: block;
 	float: left;
 }
@@ -13,12 +13,33 @@ span.non-veg-image {
 	background-image: url("../assets/veg-non-veg.png");
 	background-position: left center;
 	background-repeat: no-repeat;
-	background-size: 40px 20px;
-	width: 20px;
-	height: 20px;
+	background-size: 30px 15px;
+	width: 15px;
+	height: 15px;
 	display: block;
 	float: left;
 }
+span.cart-image {
+	background-image: url("../assets/cart.png");
+	background-position: right center;
+	background-repeat: no-repeat;
+	background-size: 30px 30px;
+	width: 30px;
+	height: 30px;
+	display: block;
+	float: left;
+}
+span.empty-cart {
+	background-image: url("../assets/empty-cart.png");
+	background-position: right center;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	width: 240px;
+	height: 200px;
+	display: block;
+	float: left;
+}
+
 p {padding: 10px 5px 0px 0px;}
 
 .header {
@@ -26,4 +47,13 @@ p {padding: 10px 5px 0px 0px;}
 	font-weight: bolder;
 	font-size: 3vw;
 	font-style: oblique;
+}
+hr { 
+	background-color: #800000; 
+	height: 1px;
+	width: 100%;
+	border: 0; 
+}
+.red-border {
+	border-color: #800000;
 }

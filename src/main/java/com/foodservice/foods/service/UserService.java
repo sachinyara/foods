@@ -9,7 +9,7 @@ import com.foodservice.foods.domain.User;
  *
  */
 public interface UserService {
-	Long get(final String deviceId);
-	void create(final User user);
+	Long get(final String userId, final String deviceId);
+	User create(final User user);
 	
 }

@@ -12,6 +12,6 @@ import com.foodservice.foods.domain.User;
  * @author SKumar6
  */
 public interface UserRepository extends JpaRepository<User, Long>{
-	@Query("select u.id from User u where u.deviceId = :deviceId")
-	Long findByDeviceId(@Param("deviceId") final String deviceId);
+	@Query("select u.id from User u where u.deviceId = :deviceId or u.userId = :userId")
+	Long findByUserOrDeviceId(@Param("userId") final String userId, @Param("deviceId") final String deviceId);
 }

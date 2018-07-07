@@ -18,13 +18,13 @@ public class UserServiceImpl implements UserService{
 	private UserRepository userRepository;
 
 	@Override
-	public Long get(final String deviceId) {
-		return userRepository.findByDeviceId(deviceId);
+	public Long get(final String userId, final String deviceId) {
+		return userRepository.findByUserOrDeviceId(userId, deviceId);
 	}
 
 	@Override
-	public void create(User user) {
-		userRepository.save(user);
+	public User create(User user) {
+		return userRepository.save(user);
 	}
 
 }

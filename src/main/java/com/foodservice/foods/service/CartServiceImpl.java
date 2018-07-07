@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.foodservice.foods.domain.Cart;
+import com.foodservice.foods.domain.Items;
 import com.foodservice.foods.repository.CartRepository;
 
 /**
@@ -29,15 +30,23 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public List<Cart> create(final Long userId, final Cart cart) {
+	public List<Cart> add(final Long userId, final Cart cart) {
 		cartRepository.save(cart);
 		return cartRepository.findAllByUserId(userId);
 	}
 
 	@Override
-	public List<Cart> delete(final Long userId, final Cart cart) {
-		cartRepository.delete(cart);
+	public List<Cart> remove(final Long userId, final Cart cart) {
+		if(cart.getQuantity() == 0) {
+			cartRepository.delete(cart);
+		}else {
+			cartRepository.save(cart);
+		}
 		return cartRepository.findAllByUserId(userId);
 	}
-
+	
+	@Override
+	public void remove(final Long userId, final Items item) {
+		cartRepository.deleteByUserIdAndItem(userId, item);
+	}
 }

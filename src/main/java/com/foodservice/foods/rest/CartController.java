@@ -1,14 +1,10 @@
 package com.foodservice.foods.rest;
 
 import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,26 +25,16 @@ public class CartController {
 	private CartService cartService;
 
 	@RequestMapping(value="{userId}", method = RequestMethod.GET)
-	public List<Cart> get(final HttpServletRequest request, final HttpServletResponse response,
-			@PathVariable final Long userId) {
-		String deviceId = null;
-
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null)
-			for (Cookie cookie : cookies) {
-				if ("_deviceId".equals(cookie.getName())) {
-					deviceId = cookie.getValue();
-				}
-			}
-		System.out.println("DeviceId:" + deviceId);
-
-		if (deviceId == null) {
-			Cookie deviceIdcookie = new Cookie("_deviceId", UUID.randomUUID().toString());
-			deviceIdcookie.setSecure(true);
-			deviceIdcookie.setMaxAge(60 * 60 * 24 * 180);
-			System.out.println(deviceIdcookie.getDomain());
-			response.addCookie(deviceIdcookie);
-		}
+	public List<Cart> get(@PathVariable final Long userId) {
 		return cartService.get(userId);
+	}
+	@RequestMapping(value = "{userId}", method = RequestMethod.POST)
+	public List<Cart> add(@PathVariable final Long userId, @RequestBody final Cart cart) {
+		return cartService.add(userId, cart);
+	}
+	
+	@RequestMapping(value = "{userId}", method = RequestMethod.PUT)
+	public List<Cart> remove(@PathVariable final Long userId, @RequestBody final Cart cart) {
+		return cartService.remove(userId, cart);
 	}
 }
