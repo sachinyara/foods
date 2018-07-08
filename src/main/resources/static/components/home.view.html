@@ -8,9 +8,9 @@
 	</div>
 	<div class="col-sm-6">
 		<div ng-repeat = "itemCategory in items">
-			<div class="row">
+			<div class="row" id="category{{itemCategory.categoryId}}">
 				<div class="col-sm-12">
-					<h4 id="category{{itemCategory.categoryId}}" style="color:#800000">{{itemCategory.category}}</h4>
+					<h4 style="color:#800000">{{itemCategory.category}}</h4>
 				</div>
 			</div>
 			<div class="row">
