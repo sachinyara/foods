@@ -57,3 +57,10 @@ hr {
 .red-border {
 	border-color: #800000;
 }
+
+[id*="category"]:before {
+	display: block;
+	content: "";
+	height: 110px;
+	margin: -110px 0 0;
+}
