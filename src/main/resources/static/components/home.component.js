@@ -12,11 +12,6 @@ function () {
 	    	self.siteName = "Ghar Da Khana";
 	    	itemsService.getAll().then(function(response) {
 	    		$scope.items = response.data;
-	    		$scope.items.forEach(itemCategory => {
-    				itemCategory.items.forEach(item => {
-    					item.orderQantity = 0;
-    				});
-	    		});
 	    	});
 	    	 
 	    	$scope.$watch('items', function(newItems, oldItems) {
@@ -41,7 +36,8 @@ function () {
 	    	self.addItemToCart = function(item) {
 	    		var itemCopy = angular.copy(item);
 	    		itemCopy.itemImage = [];
-	    		item.orderQantity++;
+	    		if(item.orderQantity)
+	    			item.orderQantity++;
     			var cartItem = null;
     			if(self.cart != null)
     				cartItem = self.cart.find(cartItem => cartItem.item.id == item.id);
@@ -49,11 +45,11 @@ function () {
 	    			cartItem = {
 	    				userId: self.userId,
 	    				item : itemCopy,
-	    				quantity: item.orderQantity
+	    				quantity: 1
 	    			};
     			}
     			else {
-    				cartItem.quantity = item.orderQantity;
+    				cartItem.quantity++;
     				cartItem.item.itemImage = [];
     			}
     			itemsService.addItem(self.userId, cartItem).then(function(response) {
@@ -64,10 +60,10 @@ function () {
 	    	};
 	    	
 	    	self.removeItemToCart = function(item) {
-	    		if(item.orderQantity > 0) {
+	    		if(item.orderQantity && item.orderQantity > 0) {
 	    			item.orderQantity--;
 	    			var cartItem = self.cart.find(cartItem => cartItem.item.id == item.id);
-	    			cartItem.quantity = item.orderQantity;
+	    			cartItem.quantity++;
 	    			itemsService.removeItem(self.userId, cartItem).then(function(response) {
 	    				self.cart = response.data;
 	    				self.totalBill = 0;

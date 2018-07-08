@@ -1,16 +1,12 @@
 <div class="row" style="padding:100px 0px 0px 0px;">
 	<div class="col-sm-2">
-		<div class="row">
-			<h4>&nbsp;</h4>
-			<div class="col-sm-12">	
-				<div ng-repeat = "itemCategory in items">
-					<a href="#category{{itemCategory.categoryId}}" class="btn btn-default btn-block red-border">
-					<h4 style="color:#800000">{{itemCategory.category}}</h4></a>
-				</div>
-			</div>
-		</div>
+		<h4>&nbsp;</h4>
+		<span ng-repeat = "itemCategory in items">
+			<a href="#category{{itemCategory.categoryId}}" class="btn btn-default btn-md btn-block red-border">
+			<h4 style="color:#800000">{{itemCategory.category}}</h4></a>
+		</span>
 	</div>
-	<div class="col-sm-7">
+	<div class="col-sm-6">
 		<div ng-repeat = "itemCategory in items">
 			<div class="row">
 				<div class="col-sm-12">
@@ -46,7 +42,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-3">
+	<div class="col-sm-4">
+		<div>
 		<div class="row">
 				<div class="col-sm-12">
 					<span class="cart-image"></span>
@@ -60,14 +57,18 @@
 			</div>
 		</div>
 		<div class="row" style="padding: 3px" ng-repeat = "cartItem in $ctrl.cart">
-			<div class="col-sm-6">
+			<div class="col-sm-5">
 				<span class="veg-image"></span>
-				<h6 class="float-left" style="display: inline;">&nbsp;{{cartItem.item.name}}</h6>
-			</div>
-			<div class="col-sm-2 small">
-				{{cartItem.quantity}}
+				<span class="float-left" style="display: inline;">&nbsp;{{cartItem.item.name}}</span>
 			</div>
 			<div class="col-sm-4 small">
+				<span class="btn-group  pull-right">
+				  <button type="button" class="btn btn-default btn-xs" ng-click="$ctrl.removeItemFromCart(cartItem.item)">-</button>
+				  <button type="button" class="btn btn-default btn-xs">{{cartItem.quantity}}</button>
+				  <button type="button" class="btn btn-default btn-xs" ng-click="$ctrl.addItemToCart(cartItem.item)">+</button>
+				</span>
+			</div>
+			<div class="col-sm-3 small">
 				Rs {{cartItem.item.price * cartItem.quantity}}
 			</div>
 		</div>
@@ -91,5 +92,6 @@
 			</div>
 		</div>
 		</div>
+	</div>
 	</div>
 </div>

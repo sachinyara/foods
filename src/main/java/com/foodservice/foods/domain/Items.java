@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -60,6 +61,9 @@ public class Items {
 	@Column(name = "CREATION_DATE")
 	@CreationTimestamp
 	private Date creationDate;
+	
+	@Transient
+	private int orderQuantity;
 
 	public Long getId() {
 		return id;
@@ -149,11 +153,19 @@ public class Items {
 		this.creationDate = creationDate;
 	}
 
+	public int getOrderQuantity() {
+		return orderQuantity;
+	}
+
+	public void setOrderQuantity(int orderQuantity) {
+		this.orderQuantity = orderQuantity;
+	}
+
 	@Override
 	public String toString() {
-		return "Items [id=" + id + ", name=" + name + ", description=" + description +  
-				", itemImage=" + Arrays.toString(itemImage) + ", itemCategory=" + itemCategory
-				+ ", price=" + price + ", available=" + available + ", isVeg=" + isVeg + ", lastUpdatedBy="
-				+ lastUpdatedBy + ", lastUpdatedDate=" + lastUpdatedDate + ", creationDate=" + creationDate + "]";
+		return "Items [id=" + id + ", name=" + name + ", description=" + description + ", itemImage="
+				+ Arrays.toString(itemImage) + ", itemCategory=" + itemCategory + ", price=" + price + ", available="
+				+ available + ", isVeg=" + isVeg + ", lastUpdatedBy=" + lastUpdatedBy + ", lastUpdatedDate="
+				+ lastUpdatedDate + ", creationDate=" + creationDate + ", orderQuantity=" + orderQuantity + "]";
 	}
 }
