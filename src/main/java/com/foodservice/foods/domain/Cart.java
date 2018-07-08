@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -26,9 +24,8 @@ public class Cart {
 	@Column(name = "USER_ID")
 	private Long userId;
 	
-	@ManyToOne
-	@JoinColumn(name = "ITEM_ID")
-	private Items item;
+	@Column(name = "ITEM_ID")
+	private Long itemId;
 	
 	@Column(name = "QUANTITY")
 	private Integer quantity;
@@ -48,13 +45,13 @@ public class Cart {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-
-	public Items getItem() {
-		return item;
+	
+	public Long getItemId() {
+		return itemId;
 	}
 
-	public void setItem(Items item) {
-		this.item = item;
+	public void setItemId(Long itemId) {
+		this.itemId = itemId;
 	}
 
 	public Integer getQuantity() {
@@ -67,6 +64,6 @@ public class Cart {
 
 	@Override
 	public String toString() {
-		return "Cart [userId=" + userId + ", item=" + item + ", quantity=" + quantity + "]";
+		return "Cart [userId=" + userId + ", itemId=" + itemId + ", quantity=" + quantity + "]";
 	}
 }

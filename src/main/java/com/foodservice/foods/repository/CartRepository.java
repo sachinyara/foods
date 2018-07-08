@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.query.Param;
 
 import com.foodservice.foods.domain.Cart;
-import com.foodservice.foods.domain.Items;
 
 /**
  * The database repository interface for the {@link Cart} entity.
@@ -21,5 +20,5 @@ public interface CartRepository extends JpaRepository<Cart, Long>{
 	
 	@Transactional
 	@Modifying
-	void deleteByUserIdAndItem(@Param("userId") final Long userId, @Param("item") final Items item);
+	void deleteByUserIdAndItemId(@Param("userId") final Long userId, @Param("itemId") final Long itemId);
 }

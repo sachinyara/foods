@@ -47,29 +47,29 @@
 		<div class="row">
 				<div class="col-sm-12">
 					<span class="cart-image"></span>
-					<h4 style="color:#800000">&nbsp;&nbsp;Cart</h4>
+					<h4 style="color:#800000">&nbsp;&nbsp;Cart <span class="small" ng-if = "cart.length > 0"> (Items: {{$ctrl.totalCartItems}})</span></h4>
 				</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
 				<hr>
-				<span class="empty-cart" ng-if = "$ctrl.cart.length == 0"></span>
+				<span class="empty-cart" ng-if = "cart.length == 0"></span>
 			</div>
 		</div>
-		<div class="row" style="padding: 3px" ng-repeat = "cartItem in $ctrl.cart">
-			<div class="col-sm-5">
+		<div class="row" style="padding: 3px" ng-repeat = "cartItem in cart">
+			<div class="col-sm-6">
 				<span class="veg-image"></span>
-				<span class="float-left" style="display: inline;">&nbsp;{{cartItem.item.name}}</span>
+				<span class="float-left" style="display: inline;">&nbsp;{{cartItem.name}}</span>
 			</div>
-			<div class="col-sm-4 small">
-				<span class="btn-group  pull-right">
-				  <button type="button" class="btn btn-default btn-xs" ng-click="$ctrl.removeItemFromCart(cartItem.item)">-</button>
+			<div class="col-sm-3 small">
+				<span class="btn-group">
+				  <button type="button" class="btn btn-default btn-xs" ng-click="$ctrl.decreaseQuantity(cartItem)">-</button>
 				  <button type="button" class="btn btn-default btn-xs">{{cartItem.quantity}}</button>
-				  <button type="button" class="btn btn-default btn-xs" ng-click="$ctrl.addItemToCart(cartItem.item)">+</button>
+				  <button type="button" class="btn btn-default btn-xs" ng-click="$ctrl.increaseQuantity(cartItem)">+</button>
 				</span>
 			</div>
 			<div class="col-sm-3 small">
-				Rs {{cartItem.item.price * cartItem.quantity}}
+				<span class="pull-right">Rs {{cartItem.price * cartItem.quantity}}</span>
 			</div>
 		</div>
 		<div class="row">
@@ -77,13 +77,13 @@
 				<hr>
 			</div>
 		</div>
-		<div ng-if = "$ctrl.cart.length > 0">
+		<div ng-if = "cart.length > 0">
 		<div class="row">
 			<div class="col-sm-8">
 				<h4 style="color:#800000">Sub Total</h4>
 			</div>
 			<div class="col-sm-4">
-				<h5 style="color:#800000">Rs {{$ctrl.totalBill}}</h5>
+				<span class="pull-right"><h5 style="color:#800000">Rs {{$ctrl.totalBill}}</h5></span>
 			</div>
 		</div>
 		<div class="row">

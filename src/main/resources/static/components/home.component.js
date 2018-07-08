@@ -19,58 +19,84 @@ function () {
 		    		itemsService.getUserId().then(function(response) {
 			    		self.userId = response.data;
 			    		itemsService.getCart(self.userId).then(function(response) {
-			    			self.cart = response.data;
-			    			self.totalBill = 0;
-			    			self.cart.forEach(cartItem => self.totalBill+=cartItem.item.price*cartItem.quantity);
-			    			$scope.items.forEach(itemCategory => {
-			    				itemCategory.items.forEach(item => {
-			    					let cartItem = self.cart.find(cartItem => cartItem.item.id == item.id);
-			    					if(cartItem != null)
-			    						item.orderQantity = cartItem.quantity;
-			    				});
-			    			});
+			    			$scope.cart = response.data;
 			    		});
-			    	});
+		    		});
 				}
 			});
+	    	$scope.$watch('cart', function(newItems, oldItems) {
+	    		if($scope.cart != null) {
+	    			self.totalCartItems = 0;
+					self.totalBill = 0;
+	    			$scope.items.forEach(itemCategory => {
+	    				itemCategory.items.forEach(item => {
+	    					let cartItem = $scope.cart.find(cartItem => cartItem.itemId == item.id);
+	    					if(cartItem != null) {
+	    						item.orderQantity = cartItem.quantity;
+	    						cartItem.name = item.name;
+	    						cartItem.price = item.price;
+	    						self.totalCartItems += cartItem.quantity;
+	    						self.totalBill += cartItem.quantity * cartItem.price;
+	    					}
+	    					else
+	    						item.orderQantity = 0;
+	    				});
+	    			});
+	    		}
+			});
 	    	self.addItemToCart = function(item) {
-	    		var itemCopy = angular.copy(item);
-	    		itemCopy.itemImage = [];
 	    		if(item.orderQantity)
 	    			item.orderQantity++;
     			var cartItem = null;
-    			if(self.cart != null)
-    				cartItem = self.cart.find(cartItem => cartItem.item.id == item.id);
+    			if($scope.cart != null)
+    				cartItem = $scope.cart.find(cartItem => cartItem.itemId == item.id);
     			if(cartItem == null) {
 	    			cartItem = {
 	    				userId: self.userId,
-	    				item : itemCopy,
+	    				itemId : item.id,
 	    				quantity: 1
 	    			};
     			}
     			else {
     				cartItem.quantity++;
-    				cartItem.item.itemImage = [];
     			}
     			itemsService.addItem(self.userId, cartItem).then(function(response) {
-    				self.cart = response.data;
+    				$scope.cart = response.data;
     				self.totalBill = 0;
-    				self.cart.forEach(cartItem => self.totalBill+=cartItem.item.price*cartItem.quantity);
+    				$scope.cart.forEach(cartItem => self.totalBill+=cartItem.price*cartItem.quantity);
     			});
 	    	};
 	    	
 	    	self.removeItemToCart = function(item) {
 	    		if(item.orderQantity && item.orderQantity > 0) {
 	    			item.orderQantity--;
-	    			var cartItem = self.cart.find(cartItem => cartItem.item.id == item.id);
-	    			cartItem.quantity++;
+	    			var cartItem = $scope.cart.find(cartItem => cartItem.itemId == item.id);
+	    			cartItem.quantity--;
 	    			itemsService.removeItem(self.userId, cartItem).then(function(response) {
-	    				self.cart = response.data;
+	    				$scope.cart = response.data;
 	    				self.totalBill = 0;
-	    				self.cart.forEach(cartItem => self.totalBill+=cartItem.item.price*cartItem.quantity);
+	    				$scope.cart.forEach(cartItem => self.totalBill+=cartItem.price*cartItem.quantity);
 	    			});
 	    		}
-	    	}
+	    	};
+	    	
+	    	self.increaseQuantity = function(cartItem) {
+    			cartItem.quantity++;
+    			itemsService.addItem(self.userId, cartItem).then(function(response) {
+    				$scope.cart = response.data;
+    				self.totalBill = 0;
+    				$scope.cart.forEach(cartItem => self.totalBill+=cartItem.price*cartItem.quantity);
+    			});
+	    	};
+	    	
+	    	self.decreaseQuantity = function(cartItem) {
+    			cartItem.quantity--;
+    			itemsService.removeItem(self.userId, cartItem).then(function(response) {
+    				$scope.cart = response.data;
+    				self.totalBill = 0;
+    				$scope.cart.forEach(cartItem => self.totalBill+=cartItem.price*cartItem.quantity);
+    			});
+	    	};
 	    }]
 	})
 	.service('itemsService', ['$http', function($http) {
