@@ -45,7 +45,7 @@ p {padding: 10px 5px 0px 0px;}
 .header {
 	color: #800000;
 	font-weight: bolder;
-	font-size: 3vw;
+	font-size: 30pt;
 	font-style: oblique;
 }
 hr { 
@@ -63,4 +63,42 @@ hr {
 	content: "";
 	height: 110px;
 	margin: -110px 0 0;
+}
+
+/* The sidebar menu */
+.sidenav {
+	text-align:right;
+    height: 100%; 
+    width: 190px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+	text-align:right;
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 14pt;
+    color: #800000;
+    display: block;
+}
+
+.sidenav a:hover {
+	align: right;
+    color: green;
+}
+
+.main {
+    margin-left: 160px; 
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px; text-align:right;}
 }

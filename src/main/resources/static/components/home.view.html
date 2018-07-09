@@ -1,12 +1,13 @@
+<!-- Side navigation -->
+<div class="sidenav">
+	<br/><br/><br/><br/><br/><br/>
+	<span ng-repeat = "itemCategory in items">
+		<a href="#category{{itemCategory.categoryId}}">{{itemCategory.category}}</a>
+	</span>
+</div>
 <div class="row" style="padding:100px 0px 0px 0px;">
-	<div class="col-sm-2">
-		<h4>&nbsp;</h4>
-		<span ng-repeat = "itemCategory in items">
-			<a href="#category{{itemCategory.categoryId}}" class="btn btn-default btn-md btn-block red-border">
-			<h4 style="color:#800000">{{itemCategory.category}}</h4></a>
-		</span>
-	</div>
-	<div class="col-sm-6">
+	<div class="col-sm-1"></div>
+	<div class="col-sm-7">
 		<div ng-repeat = "itemCategory in items">
 			<div class="row" id="category{{itemCategory.categoryId}}">
 				<div class="col-sm-12">
@@ -21,7 +22,7 @@
 							<div class="caption item-details">
 								<span class="veg-image"></span>
 								<h4 class="float-left" style="display: inline;">&nbsp;{{item.name}}</h4>
-								<p class="small">{{item.description}}</p>
+								<p class="small" custom-title="item.description" >{{item.description|ellipsis}}</p>
 								<p>
 									<span class="text-danger" >&nbsp;Rs {{item.price}}</span>
 									<span ng-show="item.orderQantity > 0">
